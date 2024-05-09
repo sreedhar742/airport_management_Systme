@@ -11,10 +11,12 @@ and open the template in the editor.
     </head>
     <body>
 
-        <center><form action="/login/doauth" method="post">{% csrf_token %}
+        <center><form method="post" action="{% url 'doauth'%}">
+            {% csrf_token %}
 			{% if message %}
             {{ message }}
 			{% endif %}
+            <br><br>
             *Username:<input type="text" name="username" required="username required"><br><br>
             *Password:<input type="password" name="password" required="password required"><br><br>
             <input type="submit" value="Submit" class="btn btn-secondary">

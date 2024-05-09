@@ -12,6 +12,7 @@ def doinit(request):
     c = {}
     c.update(csrf(request))
     return render(request, 'livestatus.html')
+
 @login_required(login_url='/login/login')
 def dolivef(request):
     return render(request,'LiveFlight.html')

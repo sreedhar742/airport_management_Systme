@@ -5,5 +5,6 @@ urlpatterns = [
     path('', views.dohome, name='dohome'),
     path('login/', views.dologin, name='dologin'),
     path('doauth/', views.doauth, name='doauth'),
-    path('logout/', views.dologout, name='dologout'),
+    path('login/logout/', views.dologout, name='dologout'),
+    path('register/',views.register,name="register"),
 ]
