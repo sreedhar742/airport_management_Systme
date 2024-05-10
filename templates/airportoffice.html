@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>The Airport</title>
+	<title>Welcome to Miami Airport</title>
 	<h2></h2>
 </head>
 <body>
-    <form>{% csrf_token %}
+    {% comment %} <form>{% csrf_token %}
+		
 
           <a href="/live/"><input type="button" name="live" value="Live"></a>
           <a href="/schedule/"><input type="button" name="schedule" value="Schedule"></a>
@@ -19,7 +20,36 @@
 		<input type="submit" value="Flight Update"/>
 	</form>
     <form action="reset" method="post">{% csrf_token %}
-		<input type="submit" value="Reset"/>
-	</form>
+		<input type="submit" value="Reset"/> 
+	</form> {% endcomment %}
+	
+<body>
+    <table>
+        <thead>
+			<h1 align="center">Welcome to kochin Airport</h1>
+            <tr>
+                <th>Airport Name:</th>
+				<th>Destination:</th>
+				<th>Arrivaltime:</th>
+				<th>Departtime:</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for name in airports %}
+            <tr>
+                <td>{{ name.airportname }}</td>
+				<td>{{ name.destinyname }}</td>
+				<td>{{ name.arrivaltime }}</td>
+				<td>{{ name.departtime }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <button><a style="color:white;" href=" ">Add New Airport</a></button>
+</body>
+
+</html>
 </body>
 </html>

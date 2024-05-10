@@ -7,17 +7,24 @@ from schedule.models import Schedule,Flight
 from livestatus.models import Status,Passenger,Goods,LiveFlight
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+from airportoffice.models import Airports
 @login_required(login_url='/login/login')
+
 def doinit(request):
     c = {}
     c.update(csrf(request))
-    return render(request, 'airportoffice.html')
+    data=Airports.objects.all()
+    return render(request, 'airportoffice.html',{'airports':data})
+
+
 @login_required(login_url='/login/login')
 def doflboarding(request):
     return render(request,'boarding.html')
+
 @login_required(login_url='/login/login')
 def doflupdate(request):
     return render(request,'flightupdate.html')
+
 @login_required(login_url='/login/login')
 def doboarding(request):
     pnr=request.POST.get('pnr','')
@@ -42,6 +49,7 @@ def doboarding(request):
     else:
         messages="Flight PNR Mismatch"
     return render(request,"boarding.html",{'messages':messages})
+
 @login_required(login_url='/login/login')
 def doflightupdate(request):
     flightid=request.POST.get('flightid','')
@@ -75,6 +83,8 @@ def doflightupdate(request):
                 flgt=LiveFlight.objects.filter(flightid=flightid).update(status="Departed from "+station)
             messages="Flight & Passenger Done"
     return render(request,"flightupdate.html",{'messages':messages})
+
+
 @login_required(login_url='/login/login')
 def doreset(request):
     LiveFlight.objects.all().update(status='At Source')
